@@ -79,3 +79,49 @@ The step numbers are referenced in the code at the points where each task is com
     2. User creates TCP connection with client host and client port
     3. Now data that user sends goes through VPN client, gets encrypted, gets sent to VPN server, gets decrypted and sent to target.
 10. Setup of secure communication channel is now complete 
+
+## Architecture of Codebase 
+```
+Virtual-Private-Network/
+|
+|-- .gitattributes
+|-- .gitignore
+|-- README.md
+|-- plaininput
+|-- src/
+    |
+    |-- client/          # Client-side code
+    |   |-- ForwardClient.java
+    |
+    |-- server/          # Server-side logic
+    |   |-- ForwardServer.java
+    |
+    |-- communication/   # Handles client-server communication
+    |   |-- handshake/
+    |   |   |-- AsymmetricCrypto.java
+    |   |   |-- HandleCertificate.java
+    |   |   |-- Handshake.java
+    |   |   |-- HandshakeCrypto.java
+    |   |   |-- HandshakeMessage.java
+    |   |   |-- aCertificate.java
+    |   |
+    |   |-- session/
+    |   |   |-- IV.java
+    |   |   |-- SessionDecrypter.java
+    |   |   |-- SessionEncrypter.java
+    |   |   |-- SessionKey.java
+    |   |
+    |   |-- threads/
+    |   |   |-- ForwardServerClientThread.java
+    |   |   |-- ForwardThread.java
+    |
+    |-- meta/            # Metadata, configurations, utilities
+    |   |-- Arguments.java
+    |   |-- Common.java
+    |   |-- Logger.java
+    |   |
+    |   |-- tests/
+    |       |-- HandshakeCryptoTester.java
+    |       |-- TestSessionCrypto.java
+    |       |-- VPNTester.java
+```
